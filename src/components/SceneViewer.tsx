@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Play, Pause, RotateCcw, Maximize, Volume2 } from "lucide-react";
+import { Play, Pause, RotateCcw, Maximize, Volume2, Globe } from "lucide-react";
 import * as THREE from "three";
 
 interface SceneViewerProps {
