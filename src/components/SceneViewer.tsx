@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -17,7 +18,7 @@ export const SceneViewer = ({ world, isGenerating }: SceneViewerProps) => {
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const frameRef = useRef<number>();
   const [isPlaying, setIsPlaying] = useState(true);
-  const [selectedObject, setSelectedObject] = useState<string | null>(null);
+  const [selectedObject, setSelectedObject] = useState<any>(null);
   const [showInfo, setShowInfo] = useState(false);
 
   useEffect(() => {
@@ -159,6 +160,9 @@ export const SceneViewer = ({ world, isGenerating }: SceneViewerProps) => {
   useEffect(() => {
     if (!world || !sceneRef.current) return;
 
+    console.log('Generating world objects for:', world.topic);
+    console.log('World objects:', world.objects);
+
     // Clear existing objects (except lights and stars)
     const objectsToRemove = sceneRef.current.children.filter(
       child => child.userData.isWorldObject
@@ -168,14 +172,23 @@ export const SceneViewer = ({ world, isGenerating }: SceneViewerProps) => {
     // Add enhanced world objects
     if (world.objects) {
       world.objects.forEach((obj: any, index: number) => {
+        console.log('Creating object:', obj.name, 'with scale:', obj.scale, 'at position:', obj.position);
+        
         let geometry;
         
         switch (obj.type) {
           case 'sphere':
-            geometry = new THREE.SphereGeometry(obj.scale || 1, 64, 64);
+            const sphereScale = typeof obj.scale === 'number' ? obj.scale : 1;
+            geometry = new THREE.SphereGeometry(sphereScale, 64, 64);
             break;
           case 'box':
-            geometry = new THREE.BoxGeometry(obj.scale || 1, obj.scale || 1, obj.scale || 1);
+            // Handle both single scale value and array [width, height, depth]
+            if (Array.isArray(obj.scale)) {
+              geometry = new THREE.BoxGeometry(obj.scale[0], obj.scale[1], obj.scale[2]);
+            } else {
+              const scale = obj.scale || 1;
+              geometry = new THREE.BoxGeometry(scale, scale, scale);
+            }
             break;
           case 'helix':
             // Enhanced DNA helix representation
@@ -205,7 +218,8 @@ export const SceneViewer = ({ world, isGenerating }: SceneViewerProps) => {
           isWorldObject: true, 
           name: obj.name,
           originalColor: obj.color || '#ffffff',
-          description: obj.description || `Learn about ${obj.name}`
+          description: obj.description || `Learn about ${obj.name}`,
+          fullObject: obj
         };
         
         // Enhanced glow effect
@@ -221,7 +235,7 @@ export const SceneViewer = ({ world, isGenerating }: SceneViewerProps) => {
         mesh.add(glow);
 
         // Add orbit trails for planets
-        if (obj.type === 'sphere' && obj.name !== 'Sun') {
+        if (obj.type === 'sphere' && obj.name !== 'Sun' && world.topic?.toLowerCase().includes('solar')) {
           const orbitRadius = Math.sqrt(position[0] ** 2 + position[2] ** 2);
           const orbitGeometry = new THREE.RingGeometry(orbitRadius - 0.1, orbitRadius + 0.1, 64);
           const orbitMaterial = new THREE.MeshBasicMaterial({
@@ -236,6 +250,9 @@ export const SceneViewer = ({ world, isGenerating }: SceneViewerProps) => {
           sceneRef.current?.add(orbit);
         }
 
+        // Add click interaction
+        mesh.addEventListener = () => {}; // Placeholder for click events
+        
         sceneRef.current?.add(mesh);
       });
     }
@@ -322,14 +339,21 @@ export const SceneViewer = ({ world, isGenerating }: SceneViewerProps) => {
             <p className="text-cyan-100 text-sm leading-relaxed">
               {world.description || "Explore this interactive 3D learning environment"}
             </p>
-            {showInfo && world.objects && (
+            {world.narration && (
+              <div className="mt-3 p-3 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-lg border border-cyan-500/20">
+                <p className="text-cyan-100 text-sm italic">
+                  🎯 {world.narration}
+                </p>
+              </div>
+            )}
+            {showInfo && world.learningObjectives && (
               <div className="mt-4 p-4 bg-black/30 rounded-lg border border-cyan-500/20">
                 <h4 className="text-cyan-300 font-medium mb-2">Learning Objectives:</h4>
                 <ul className="text-gray-300 text-sm space-y-1">
-                  {world.objects.map((obj: any, index: number) => (
+                  {world.learningObjectives.map((objective: string, index: number) => (
                     <li key={index} className="flex items-center">
                       <div className="w-2 h-2 bg-cyan-400 rounded-full mr-2"></div>
-                      Understand the role and properties of {obj.name}
+                      {objective}
                     </li>
                   ))}
                 </ul>
@@ -379,7 +403,7 @@ export const SceneViewer = ({ world, isGenerating }: SceneViewerProps) => {
                 </h3>
                 <p className="text-gray-300 leading-relaxed mb-6">
                   Generate a world or select a pre-made topic to begin your immersive 3D learning journey. 
-                  Experience education like never before!
+                  Try topics like "Ocean Depth", "Human Heart", or "Solar System"!
                 </p>
                 <div className="flex items-center justify-center space-x-4 text-sm text-cyan-300">
                   <div className="flex items-center">
@@ -406,19 +430,21 @@ export const SceneViewer = ({ world, isGenerating }: SceneViewerProps) => {
               <div className="flex items-center justify-between mb-3">
                 <h4 className="text-cyan-300 font-semibold flex items-center">
                   <div className="w-3 h-3 bg-cyan-400 rounded-full mr-2 animate-pulse"></div>
-                  Interactive Objects
+                  Interactive Objects ({world.objects.length})
                 </h4>
                 <Badge variant="secondary" className="bg-cyan-500/20 text-cyan-300 border-cyan-400/30">
-                  {world.objects.length} Objects
+                  {world.topic}
                 </Badge>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-3">
                 {world.objects.map((obj: any, index: number) => (
                   <Badge
                     key={index}
                     variant="secondary"
-                    className="bg-gradient-to-r from-white/10 to-cyan-500/10 text-gray-200 hover:from-cyan-500/20 hover:to-purple-500/20 cursor-pointer transition-all duration-300 border border-white/20 hover:border-cyan-400/40 hover:scale-105"
-                    onClick={() => setSelectedObject(obj.name)}
+                    className={`bg-gradient-to-r from-white/10 to-cyan-500/10 text-gray-200 hover:from-cyan-500/20 hover:to-purple-500/20 cursor-pointer transition-all duration-300 border border-white/20 hover:border-cyan-400/40 hover:scale-105 ${
+                      selectedObject?.name === obj.name ? 'bg-gradient-to-r from-cyan-500/30 to-purple-500/30 border-cyan-400/60' : ''
+                    }`}
+                    onClick={() => setSelectedObject(selectedObject?.name === obj.name ? null : obj)}
                   >
                     <div 
                       className="w-2 h-2 rounded-full mr-2" 
@@ -429,10 +455,10 @@ export const SceneViewer = ({ world, isGenerating }: SceneViewerProps) => {
                 ))}
               </div>
               {selectedObject && (
-                <div className="mt-3 p-3 bg-black/40 rounded-lg border border-cyan-500/30">
+                <div className="p-3 bg-black/40 rounded-lg border border-cyan-500/30">
+                  <h5 className="font-medium text-cyan-300 mb-1">{selectedObject.name}</h5>
                   <p className="text-cyan-100 text-sm">
-                    <span className="font-medium text-cyan-300">{selectedObject}:</span> 
-                    {" "}Click and explore this object to learn about its properties and role in the concept.
+                    {selectedObject.description}
                   </p>
                 </div>
               )}
