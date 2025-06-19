@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -69,17 +68,35 @@ export const WorldGenerator = ({ onWorldGenerated, isGenerating, setIsGenerating
     const topicLower = topic.toLowerCase();
     const objectives = [];
     
-    if (topicLower.includes('solar') || topicLower.includes('planet')) {
+    if (topicLower.includes('solar') || topicLower.includes('planet') || topicLower.includes('space')) {
       objectives.push(
         "Understand the relative sizes and distances of planets",
         "Learn about gravitational forces and orbital mechanics",
         "Explore the unique characteristics of each celestial body"
       );
-    } else if (topicLower.includes('atom') || topicLower.includes('molecular')) {
+    } else if (topicLower.includes('atom') || topicLower.includes('molecular') || topicLower.includes('chemistry')) {
       objectives.push(
         "Visualize atomic structure and electron behavior",
         "Understanding chemical bonding and molecular formation",
         "Explore quantum mechanical principles"
+      );
+    } else if (topicLower.includes('ocean') || topicLower.includes('sea') || topicLower.includes('marine')) {
+      objectives.push(
+        "Understand ocean layers and their characteristics",
+        "Learn about marine ecosystems and biodiversity",
+        "Explore the effects of pressure and light at different depths"
+      );
+    } else if (topicLower.includes('human') || topicLower.includes('body') || topicLower.includes('anatomy')) {
+      objectives.push(
+        "Understand the structure and function of body systems",
+        "Learn how organs work together",
+        "Explore the interconnections between different body parts"
+      );
+    } else if (topicLower.includes('mountain') || topicLower.includes('geology') || topicLower.includes('earth')) {
+      objectives.push(
+        "Understand geological formations and processes",
+        "Learn about rock layers and mineral composition",
+        "Explore tectonic forces and mountain building"
       );
     } else {
       objectives.push(
@@ -96,7 +113,61 @@ export const WorldGenerator = ({ onWorldGenerated, isGenerating, setIsGenerating
     const objects = [];
     const topicLower = topic.toLowerCase();
     
-    if (topicLower.includes('solar') || topicLower.includes('planet')) {
+    // Ocean/Marine topics
+    if (topicLower.includes('ocean') || topicLower.includes('sea') || topicLower.includes('marine') || topicLower.includes('depth')) {
+      objects.push(
+        { 
+          type: 'box', 
+          name: 'Surface Layer', 
+          position: [0, 4, 0], 
+          color: '#87CEEB', 
+          scale: [8, 0.5, 8],
+          description: 'The sunlight zone (0-200m) where most marine life exists and photosynthesis occurs.'
+        },
+        { 
+          type: 'box', 
+          name: 'Twilight Zone', 
+          position: [0, 2, 0], 
+          color: '#4682B4', 
+          scale: [8, 1, 8],
+          description: 'The mesopelagic zone (200-1000m) where light fades and bioluminescent creatures begin to appear.'
+        },
+        { 
+          type: 'box', 
+          name: 'Midnight Zone', 
+          position: [0, 0, 0], 
+          color: '#191970', 
+          scale: [8, 1.5, 8],
+          description: 'The bathypelagic zone (1000-4000m) of perpetual darkness with extreme pressure and cold.'
+        },
+        { 
+          type: 'box', 
+          name: 'Abyssal Zone', 
+          position: [0, -2, 0], 
+          color: '#0F0F23', 
+          scale: [8, 1, 8],
+          description: 'The deepest accessible zone (4000-6000m) with unique life forms adapted to crushing pressure.'
+        },
+        { 
+          type: 'sphere', 
+          name: 'Whale', 
+          position: [3, 3, 2], 
+          color: '#696969', 
+          scale: 1.5,
+          description: 'Marine mammals that migrate between ocean layers, playing crucial roles in the ecosystem.'
+        },
+        { 
+          type: 'sphere', 
+          name: 'Jellyfish', 
+          position: [-2, 1.5, -1], 
+          color: '#FF69B4', 
+          scale: 0.8,
+          description: 'Translucent creatures found at various depths, some with bioluminescent capabilities.'
+        }
+      );
+    }
+    // Solar System topics
+    else if (topicLower.includes('solar') || topicLower.includes('planet') || topicLower.includes('space')) {
       objects.push(
         { 
           type: 'sphere', 
@@ -120,7 +191,7 @@ export const WorldGenerator = ({ onWorldGenerated, isGenerating, setIsGenerating
           position: [9, 0, 3], 
           color: '#CD5C5C', 
           scale: 0.7,
-          description: 'The Red Planet, a cold desert world with the largest volcano in the solar system and evidence of ancient water.'
+          description: 'The Red Planet, a cold desert world with the largest volcano in the solar system.'
         },
         { 
           type: 'sphere', 
@@ -128,10 +199,12 @@ export const WorldGenerator = ({ onWorldGenerated, isGenerating, setIsGenerating
           position: [15, 0, -2], 
           color: '#D2691E', 
           scale: 2,
-          description: 'The largest planet, a gas giant with a Great Red Spot storm and over 80 moons including the four Galilean moons.'
+          description: 'The largest planet, a gas giant with a Great Red Spot storm and over 80 moons.'
         }
       );
-    } else if (topicLower.includes('atom') || topicLower.includes('molecular')) {
+    }
+    // Atomic/Chemistry topics
+    else if (topicLower.includes('atom') || topicLower.includes('molecular') || topicLower.includes('chemistry')) {
       objects.push(
         { 
           type: 'sphere', 
@@ -139,7 +212,7 @@ export const WorldGenerator = ({ onWorldGenerated, isGenerating, setIsGenerating
           position: [0, 0, 0], 
           color: '#FF4444', 
           scale: 1.2,
-          description: 'The dense core of the atom containing protons and neutrons, where 99.9% of the atom\'s mass is concentrated.'
+          description: 'The dense core containing protons and neutrons, where 99.9% of the atom\'s mass is concentrated.'
         },
         { 
           type: 'sphere', 
@@ -147,7 +220,7 @@ export const WorldGenerator = ({ onWorldGenerated, isGenerating, setIsGenerating
           position: [3, 0, 0], 
           color: '#44FF44', 
           scale: 0.4,
-          description: 'Regions of space where electrons are most likely to be found, forming orbitals around the nucleus.'
+          description: 'Regions where electrons are most likely to be found, forming orbitals around the nucleus.'
         },
         { 
           type: 'sphere', 
@@ -155,80 +228,141 @@ export const WorldGenerator = ({ onWorldGenerated, isGenerating, setIsGenerating
           position: [-3, 0, 0], 
           color: '#4444FF', 
           scale: 0.4,
-          description: 'The outermost electron shell that determines chemical bonding and reactivity of the atom.'
-        },
-        { 
-          type: 'sphere', 
-          name: 'Ion Formation', 
-          position: [0, 3, 0], 
-          color: '#FF44FF', 
-          scale: 0.6,
-          description: 'The process of gaining or losing electrons to form charged particles called ions.'
+          description: 'The outermost electron shell that determines chemical bonding and reactivity.'
         }
       );
-    } else if (topicLower.includes('dna') || topicLower.includes('genetic')) {
+    }
+    // Human Body/Anatomy topics
+    else if (topicLower.includes('human') || topicLower.includes('body') || topicLower.includes('anatomy') || topicLower.includes('heart') || topicLower.includes('brain')) {
       objects.push(
         { 
-          type: 'helix', 
-          name: 'Double Helix', 
+          type: 'sphere', 
+          name: 'Heart', 
           position: [0, 0, 0], 
-          color: '#00FF88', 
-          scale: 1.5,
-          description: 'The twisted ladder structure of DNA, consisting of two complementary strands held together by base pairs.'
-        },
-        { 
-          type: 'sphere', 
-          name: 'Nucleotide', 
-          position: [3, 1, 0], 
-          color: '#FF8800', 
-          scale: 0.6,
-          description: 'Building blocks of DNA consisting of a phosphate group, sugar, and one of four nitrogenous bases.'
-        },
-        { 
-          type: 'sphere', 
-          name: 'RNA Polymerase', 
-          position: [-2, 2, 1], 
-          color: '#8800FF', 
-          scale: 0.8,
-          description: 'The enzyme responsible for transcribing DNA into RNA during gene expression.'
-        }
-      );
-    } else {
-      // Default enhanced abstract representation
-      objects.push(
-        { 
-          type: 'box', 
-          name: 'Core Concept', 
-          position: [-3, 0, 0], 
-          color: '#6366F1', 
+          color: '#DC143C', 
           scale: 1.2,
-          description: `The fundamental principle underlying ${topic} that connects all related concepts.`
+          description: 'The muscular organ that pumps blood throughout the circulatory system.'
         },
         { 
           type: 'sphere', 
-          name: 'Key Process', 
-          position: [0, 0, 0], 
-          color: '#8B5CF6', 
-          scale: 1.4,
-          description: `The central mechanism or process that drives ${topic} in real-world applications.`
+          name: 'Brain', 
+          position: [0, 3, 0], 
+          color: '#FFB6C1', 
+          scale: 1.5,
+          description: 'The control center of the nervous system, processing information and controlling body functions.'
         },
         { 
           type: 'box', 
-          name: 'Application', 
-          position: [3, 0, 0], 
-          color: '#06B6D4', 
-          scale: 1.1,
-          description: `Practical applications and real-world examples of ${topic} in action.`
+          name: 'Lungs', 
+          position: [2, 0, 0], 
+          color: '#FFC0CB', 
+          scale: 1,
+          description: 'Respiratory organs that exchange oxygen and carbon dioxide with the blood.'
+        },
+        { 
+          type: 'box', 
+          name: 'Liver', 
+          position: [-2, -1, 0], 
+          color: '#8B4513', 
+          scale: 1.3,
+          description: 'The largest internal organ, responsible for detoxification and metabolism.'
+        }
+      );
+    }
+    // Mountain/Geology topics
+    else if (topicLower.includes('mountain') || topicLower.includes('geology') || topicLower.includes('rock') || topicLower.includes('volcano')) {
+      objects.push(
+        { 
+          type: 'box', 
+          name: 'Peak', 
+          position: [0, 3, 0], 
+          color: '#FFFFFF', 
+          scale: [2, 1, 2],
+          description: 'The highest point of the mountain, often covered with snow and ice.'
+        },
+        { 
+          type: 'box', 
+          name: 'Alpine Zone', 
+          position: [0, 2, 0], 
+          color: '#8FBC8F', 
+          scale: [3, 0.5, 3],
+          description: 'The high-altitude ecosystem with specialized plants adapted to harsh conditions.'
+        },
+        { 
+          type: 'box', 
+          name: 'Forest Zone', 
+          position: [0, 1, 0], 
+          color: '#228B22', 
+          scale: [4, 0.8, 4],
+          description: 'The mountain slopes covered with dense forests of various tree species.'
+        },
+        { 
+          type: 'box', 
+          name: 'Base Layer', 
+          position: [0, 0, 0], 
+          color: '#8B4513', 
+          scale: [5, 0.5, 5],
+          description: 'The foundation layer showing sedimentary rock formations and geological history.'
+        }
+      );
+    }
+    // Plant/Photosynthesis topics
+    else if (topicLower.includes('plant') || topicLower.includes('photosynthesis') || topicLower.includes('leaf') || topicLower.includes('chlorophyll')) {
+      objects.push(
+        { 
+          type: 'sphere', 
+          name: 'Chloroplast', 
+          position: [0, 0, 0], 
+          color: '#32CD32', 
+          scale: 1,
+          description: 'The organelle where photosynthesis occurs, containing chlorophyll to capture sunlight.'
         },
         { 
           type: 'sphere', 
-          name: 'Future Impact', 
-          position: [0, 3, 0], 
-          color: '#10B981', 
-          scale: 1,
-          description: `Emerging developments and future possibilities in the field of ${topic}.`
+          name: 'Sunlight', 
+          position: [0, 4, 0], 
+          color: '#FFD700', 
+          scale: 1.5,
+          description: 'The energy source that drives photosynthesis, converted into chemical energy.'
+        },
+        { 
+          type: 'sphere', 
+          name: 'CO2', 
+          position: [-3, 2, 0], 
+          color: '#87CEEB', 
+          scale: 0.8,
+          description: 'Carbon dioxide absorbed from the atmosphere as a raw material for photosynthesis.'
+        },
+        { 
+          type: 'sphere', 
+          name: 'Oxygen', 
+          position: [3, 2, 0], 
+          color: '#00BFFF', 
+          scale: 0.8,
+          description: 'The oxygen gas released as a byproduct of photosynthesis into the atmosphere.'
         }
       );
+    }
+    // Default: Generate abstract conceptual objects for any other topic
+    else {
+      const concepts = [
+        'Core Concept', 'Key Process', 'Application', 'Future Impact',
+        'Historical Context', 'Modern Usage', 'Scientific Principle', 'Real-world Example'
+      ];
+      
+      concepts.slice(0, 4).forEach((concept, index) => {
+        const positions = [[-3, 0, 0], [0, 0, 0], [3, 0, 0], [0, 3, 0]];
+        const colors = ['#6366F1', '#8B5CF6', '#06B6D4', '#10B981'];
+        
+        objects.push({
+          type: index % 2 === 0 ? 'box' : 'sphere',
+          name: concept,
+          position: positions[index],
+          color: colors[index],
+          scale: 1.2,
+          description: `${concept} related to ${topic} - explore this element to understand its role in the broader concept.`
+        });
+      });
     }
     
     return objects;
@@ -256,7 +390,7 @@ export const WorldGenerator = ({ onWorldGenerated, isGenerating, setIsGenerating
           </Label>
           <Input
             id="topic"
-            placeholder="e.g., Solar System, Photosynthesis, DNA Structure, Climate Change..."
+            placeholder="e.g., Ocean Depth, Solar System, Human Heart, Mountain Formation, Photosynthesis..."
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
             className="bg-black/30 border-white/20 text-white placeholder:text-gray-400 focus:border-cyan-400/50 focus:ring-cyan-400/20 transition-all duration-200"
@@ -264,7 +398,7 @@ export const WorldGenerator = ({ onWorldGenerated, isGenerating, setIsGenerating
           />
           <p className="text-xs text-gray-400 flex items-center">
             <Target className="w-3 h-3 mr-1" />
-            Be specific for more detailed and accurate 3D worlds
+            Try: Ocean Depth, Mountain Layers, Human Body, Plant Cell, Volcano Structure
           </p>
         </div>
 
@@ -355,7 +489,7 @@ export const WorldGenerator = ({ onWorldGenerated, isGenerating, setIsGenerating
             <ul className="text-gray-300 text-sm space-y-1">
               <li className="flex items-center">
                 <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full mr-2"></div>
-                Interactive 3D objects with detailed explanations
+                Topic-specific 3D objects with detailed explanations
               </li>
               <li className="flex items-center">
                 <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></div>
