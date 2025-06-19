@@ -100,7 +100,7 @@ export const WorldGenerator = ({ onWorldGenerated, isGenerating, setIsGenerating
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label className="text-gray-300">Age Group</Label>
-            <Select value={ageGroup} onValueChange setAgeGroup} disabled={isGenerating}>
+            <Select value={ageGroup} onValueChange={setAgeGroup} disabled={isGenerating}>
               <SelectTrigger className="bg-white/10 border-white/20 text-white">
                 <SelectValue />
               </SelectTrigger>
