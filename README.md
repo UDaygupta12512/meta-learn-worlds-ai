@@ -40,4 +40,109 @@ Instead of learning *one task*, the model learns **how to learn tasks efficientl
 
 ## 🗂️ Project Structure
 
+meta-learn-worlds-ai/
+│
+├── public/ # Static assets
+├── src/ # Core application / frontend logic
+├── experiments/ # Experiment configurations
+├── data/ # Task data / environments
+├── models/ # Saved models & checkpoints
+├── scripts/ # Training & evaluation scripts
+├── package.json
+├── README.md
+
+
+---
+
+## ⚙️ Tech Stack
+
+- **JavaScript / TypeScript**
+- **React + Vite**
+- **Node.js**
+- **Python** (for ML / training scripts, if applicable)
+- **AI / ML frameworks** (extensible)
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Make sure you have installed:
+- Node.js (v16+)
+- npm or yarn
+- Python (optional, for ML scripts)
+
+---
+
+### Installation
+
+```bash
+git clone https://github.com/UDaygupta12512/meta-learn-worlds-ai.git
+cd meta-learn-worlds-ai
+npm install
+
+Run the Project
+npm run dev
+
+
+Open your browser at:
+
+http://localhost:5173
+
+🧪 Experiments
+
+This project supports running different learning experiments to test how models adapt across tasks.
+
+Example (placeholder):
+
+python scripts/train.py --config experiments/config.yaml
+
+
+Update configs based on your experiment setup.
+
+📌 Use Cases
+
+Final year AI / ML projects
+
+Hackathons & research demos
+
+Learning meta-learning concepts
+
+Experimenting with task generalization
+
+AI education & experimentation
+
+🤝 Contributing
+
+Contributions are welcome!
+
+Fork the repo
+
+Create a new branch
+
+Commit your changes
+
+Open a pull request
+
+📄 License
+
+This project is licensed under the MIT License — free to use, modify, and distribute.
+
+📬 Contact
+
+Have ideas, questions, or improvements?
+Open an issue or start a discussion — happy to collaborate! 🚀
+
+
+---
+
+If you want, I can also:
+- 🔥 Make it **research-paper style**
+- 🎓 Make it **final-year project friendly**
+- 🧪 Add **experiment examples**
+- 📸 Add **badges, screenshots, and demo GIFs**
+- 🧠 Rewrite it to sound **more advanced / cutting-edge**
+
+Just tell me the vibe you want 😄
 
