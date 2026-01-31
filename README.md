@@ -1,73 +1,43 @@
-# Welcome to your Lovable project
+# 🌍 Meta-Learn Worlds AI
 
-## Project info
+**Meta-Learn Worlds AI** is an experimental AI project focused on **meta-learning** — enabling models to *learn how to learn* across multiple tasks and environments.  
+The goal is to explore how intelligent systems can **generalize, adapt quickly, and transfer knowledge** instead of being trained for only one fixed task.
 
-**URL**: https://lovable.dev/projects/7c5f336e-1032-4d28-b122-5d1dbf322c25
+> 🚧 This project is under active development.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🧠 What is Meta-Learning?
 
-**Use Lovable**
+Meta-learning trains models using **multiple tasks** so they can:
+- Adapt quickly to new, unseen tasks  
+- Learn from fewer examples  
+- Transfer prior experience across environments  
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/7c5f336e-1032-4d28-b122-5d1dbf322c25) and start prompting.
+Instead of learning *one task*, the model learns **how to learn tasks efficiently**.
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 🎯 Project Objectives
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- Explore **meta-learning and multi-task learning** concepts  
+- Build reusable experiment pipelines  
+- Enable fast adaptation across simulated environments  
+- Experiment with AI generalization and task transfer  
+- Provide a foundation for research, demos, or academic projects  
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## ✨ Features
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- 🔁 Multi-task / meta-learning setup  
+- 🧪 Experiment-driven design  
+- 📊 Support for evaluation and benchmarking  
+- 🧠 Modular architecture for future models  
+- 🌐 Frontend-ready structure (React + Vite)  
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🗂️ Project Structure
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
 
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/7c5f336e-1032-4d28-b122-5d1dbf322c25) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
