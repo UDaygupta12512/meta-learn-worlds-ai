@@ -129,20 +129,7 @@ Open a pull request
 
 This project is licensed under the MIT License — free to use, modify, and distribute.
 
-📬 Contact
 
-Have ideas, questions, or improvements?
-Open an issue or start a discussion — happy to collaborate! 🚀
-
-
----
-
-If you want, I can also:
-- 🔥 Make it **research-paper style**
-- 🎓 Make it **final-year project friendly**
-- 🧪 Add **experiment examples**
-- 📸 Add **badges, screenshots, and demo GIFs**
-- 🧠 Rewrite it to sound **more advanced / cutting-edge**
 
 Just tell me the vibe you want 😄
 
